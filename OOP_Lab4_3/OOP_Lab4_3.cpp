@@ -4,10 +4,10 @@
 #include <locale.h>
 #include <windows.h>
 
-#include "container.h"
-#include "parcel.h"
-#include "transport.h"
-#include "solver.h"
+#include "Container.h"
+#include "Parcel.h"
+#include "Transport.h"
+#include "Solver.h"
 #include <vector>
 
 using namespace std;
