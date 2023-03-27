@@ -1,31 +1,23 @@
 #include "Solver.h"
 //посылка, передвинься в контейнер
-void Solver::parcel_to_container(vector<Container> *container_mass, vector<Parcel> parcel_mass, int num_parcel, int* num_container)
+void Solver::parcel_to_container(vector<Container> &container_mass, vector<Parcel> parcel_mass, int num_parcel)
 {
-	for (int i = 0; i < num_parcel; i++)
+	for (int i = 0; i < parcel_mass.size(); i++)
 	{
-		cout << "На данный момент контейнеров: " << container_mass->size();
-		cout << "Распределение начинаем!!!\n";
 		if (parcel_mass[i].danger == 1)		//распределение опасной посылки
 		{
 			Container* container_temp = new danger_cont();		
 
 			container_temp->generate_id();
 			container_temp->get_parcel(parcel_mass[i]);
-			container_mass->push_back(*container_temp);
-			*num_container = *num_container + 1;
-			
-			/*
-			cout << parcel_mass[i].danger;		//вывод флажка контейнера
-			_getch();
-			*/
+			container_mass.push_back(*container_temp);
 		}
 		else
 		{
 			if (container_mass.size() > 0)	//если уже есть контейнеры
 			{
 				//проверка наличия свободного места к существующих контейнерах
-				for (int j = 0; j < *num_container; j++)
+				for (int j = 0; j < container_mass.size(); j++)
 				{
 					if (container_mass[j].check_free_obem(parcel_mass[i].obem) > 0)
 					{
@@ -54,7 +46,6 @@ void Solver::parcel_to_container(vector<Container> *container_mass, vector<Parce
 				container_temp->generate_id();
 				container_temp->get_parcel(parcel_mass[i]);
 				container_mass.push_back(*container_temp);
-				*num_container = *num_container + 1;
 			}
 		}
 	}

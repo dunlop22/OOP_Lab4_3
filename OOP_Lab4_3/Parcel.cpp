@@ -12,7 +12,7 @@ void Parcel::print_information()
 	{
 		cout << " (!_DANGER_!) ";
 	}
-	cout << " (" << this->shirina << "x" << this->dlina << "x" << this->visota << ") " << this->weight << "кг.\n";
+	cout << " (" << this->shirina << "x" << this->dlina << "x" << this->visota << ") " << this->weight << "кг.   " << this->obem << " (м^3)\n";
 }
 //генерация случайного номера для посылки (реализовать проверку уникальности)
 void Parcel::generate_id()
@@ -50,18 +50,22 @@ void Parcel::set_information()
 
 	cout << "\n\nВведите ширину: ";
 	//cin >> this->shirina;
+	this->shirina = 8 + rand() % (54 - 8 + 1);		//генерация случайного значения объема (для теста)
 
 	cout << "\n\nВведите высоту: ";
 	//cin >> this->visota;
+	this->visota = 8 + rand() % (54 - 8 + 1);		//генерация случайного значения объема (для теста)
 
 	cout << "\n\nВведите длину: ";
 	//cin >> this->dlina;
+	this->dlina = 8 + rand() % (54 - 8 + 1);		//генерация случайного значения объема (для теста)
 
 	//this->obem = this->dlina * this->visota * this->shirina;
 	this->obem = 8 + rand() % (54 - 8 + 1);		//генерация случайного значения объема (для теста)
 
 	cout << "\n\nВведите вес (кг.): ";
 	//cin >> this->weight;
+	this->weight = 8 + rand() % (54 - 8 + 1);		//генерация случайного значения объема (для теста)
 	do
 	{
 		cout << "\n\nПосылка опасная? (1 - ДА, 2 - НЕТ)";

@@ -26,10 +26,10 @@ int main()
     int func;   //флаг для выбора пункта меню
     do
     {
-        do           //главное меню
+        do           //главное                                                                                                  меню
         {
             system("cls");
-            cout << "1) Добавить несколько новых посылок\n2) Отправить посылки\n3) Просмотр информации об имеющихся посылках\nESC) Выход\n\nОбщее количество посылок на данный момент: " << num_parcel << "\n";
+            cout << "1) Добавить несколько новых посылок\n2) Отправить посылки\n3) Просмотр информации об имеющихся посылках\nESC) Выход\n\nОбщее количество посылок на данный момент: " << num_parcel << "\nОбщее количество контейнеров на данный момент: " << container_spisok.size() << "\n";
             func = _getch();
         } while (func != 49 && func != 50 && func != 51 && func != 27);
 
@@ -66,11 +66,10 @@ int main()
         {
             if (num_parcel > 0)         //имеются посылки для отправления
             {
-                int num_container = 0;      //общее количество контейнеров
                 
                 //распределение посылок по контейнерам
                 Solver solv;
-                solv.parcel_to_container(&container_spisok, parcel_spisok, num_parcel, &num_container);
+                solv.parcel_to_container(container_spisok, parcel_spisok, num_parcel);
 
 
                 //вывод контейнеров и их посылок
@@ -81,7 +80,6 @@ int main()
 
                 cout << "\n\nРаспредление закончено. \n\nНажмите любую клавишу для продолжения";
                 cout << "Общее количество контейнеров: " << container_spisok.size();
-                cout << "Общее количество контейнеров: " << num_container;
                 
                 _getch();
                 /*
