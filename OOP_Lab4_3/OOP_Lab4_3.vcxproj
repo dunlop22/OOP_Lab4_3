@@ -140,6 +140,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="OOP_Lab4_3.cpp" />
+    <ClCompile Include="Parcel.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Parcel.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
