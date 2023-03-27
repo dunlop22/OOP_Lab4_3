@@ -23,7 +23,7 @@ protected:
 
 public:
 	virtual void generate_id();
-	virtual void get_parcel(parcel parc);
+	virtual void get_parcel(Parcel parc);
 	virtual bool check_free_obem(double obem);
 	virtual string get_town();
 	/*
@@ -106,7 +106,7 @@ class danger_cont : public Container	//контейнер с опасным содержимым
 public:
 	danger_cont()
 	{
-		container::kol_vo_parcel = 1;	//в целях безопасности
+		Container::kol_vo_parcel = 1;	//в целях безопасности
 	}
 };
 

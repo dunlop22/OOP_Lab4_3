@@ -5,7 +5,7 @@ void Container::generate_id()
 	this->id = 10000 + rand() % 90000;
 }
 
-void Container::get_parcel(parcel parc)
+void Container::get_parcel(Parcel parc)
 {
 	this->parce.push_back(parc);	//помещение посылки в список
 	this->kol_vo_parcel = kol_vo_parcel + 1;

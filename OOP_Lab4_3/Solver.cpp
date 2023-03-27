@@ -1,6 +1,6 @@
 #include "Solver.h"
 //посылка, передвинься в контейнер
-void solver::parcel_to_container(vector<container> container_mass, vector<parcel> parcel_mass, int num_parcel, int* num_container)
+void Solver::parcel_to_container(vector<Container> container_mass, vector<Parcel> parcel_mass, int num_parcel, int* num_container)
 {
 	for (int i = 0; i < num_parcel; i++)
 	{
@@ -20,7 +20,7 @@ void solver::parcel_to_container(vector<container> container_mass, vector<parcel
 			*/
 			* num_container = *num_container + 1;
 
-			container* container_temp = new danger_cont();
+			Container* container_temp = new danger_cont();
 
 			container_temp->generate_id();
 			container_temp->get_parcel(parcel_mass[i]);
@@ -52,7 +52,7 @@ void solver::parcel_to_container(vector<container> container_mass, vector<parcel
 				else    //создание нового контейнера
 				{
 				new_cont:
-					container* container_temp = new big_cont();
+					Container* container_temp = new big_cont();
 
 					container_temp->generate_id();
 					container_temp->get_parcel(parcel_mass[i]);

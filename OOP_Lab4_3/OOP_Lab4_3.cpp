@@ -72,7 +72,7 @@ int main()
                 {
                     //solver
                     //container** mass_container = new container * [0];
-                    solver solv;
+                    Solver solv;
 
                     solv.parcel_to_container(container_spisok, parcel_spisok, num_parcel, &num_container);
                     //big_cont* ty = new big_cont[10];
