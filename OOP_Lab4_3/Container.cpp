@@ -1,17 +1,17 @@
 #include "Container.h"
 
-void container::generate_id()
+void Container::generate_id()
 {
 	this->id = 10000 + rand() % 90000;
 }
 
-void container::get_parcel(parcel parc)
+void Container::get_parcel(parcel parc)
 {
 	this->parce.push_back(parc);	//помещение посылки в список
 	this->kol_vo_parcel = kol_vo_parcel + 1;
 }
 
-bool container::check_free_obem(double obem)
+bool Container::check_free_obem(double obem)
 {
 	if (this->free_obem > obem)
 	{
@@ -23,7 +23,7 @@ bool container::check_free_obem(double obem)
 	}
 }
 
-string container::get_town()
+string Container::get_town()
 {
 	return (this->town);
 }

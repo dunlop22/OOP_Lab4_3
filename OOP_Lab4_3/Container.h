@@ -1,12 +1,12 @@
 #pragma once 
 #include <string>
-#include "transport.h"
-#include "parcel.h"
+#include "Transport.h"
+#include "Parcel.h"
 #include <vector>
 
 using namespace std;
 
-class container
+class Container
 {
 	//маленький
 	//большой
@@ -16,7 +16,7 @@ class container
 
 	double free_obem;			//Количество свободного места в контейнере
 	string town;	//направление контейнера
-	vector<parcel> parce;
+	vector<Parcel> parce;
 
 protected:
 	int kol_vo_parcel = 0;		//Общее количество посылок в контейнере
@@ -101,7 +101,7 @@ public: virtual int check_free_obem(double obem)	//проверка наличия свободного м
 
 };
 
-class danger_cont : public container	//контейнер с опасным содержимым
+class danger_cont : public Container	//контейнер с опасным содержимым
 {
 public:
 	danger_cont()
@@ -111,7 +111,7 @@ public:
 };
 
 
-class small_cont : public container		//маленький контейнер
+class small_cont : public Container		//маленький контейнер
 {
 public:
 	small_cont()
@@ -120,7 +120,7 @@ public:
 	}
 };
 
-class big_cont : public container	//большой контейнер
+class big_cont : public Container	//большой контейнер
 {
 public:
 	big_cont()

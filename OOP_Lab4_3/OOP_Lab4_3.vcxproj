@@ -143,11 +143,13 @@
     <ClCompile Include="OOP_Lab4_3.cpp" />
     <ClCompile Include="Parcel.cpp" />
     <ClCompile Include="Solver.cpp" />
+    <ClCompile Include="Transport.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Container.h" />
     <ClInclude Include="Parcel.h" />
     <ClInclude Include="Solver.h" />
+    <ClInclude Include="Transport.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,28 +1,28 @@
 #include "Parcel.h"
 
-int parcel::get_id()
+int Parcel::get_id()
 {
 	return (this->id);
 }
 //вывод информации о посылке
-void parcel::print_information()
+void Parcel::print_information()
 {
 	cout << this->id << " : " << this->town_sender << "-->" << this->town_recipient << "  (" << this->shirina << "x" << this->dlina << "x" << this->visota << ") " << this->weight << "кг.\n";
 }
 //генерация случайного номера для посылки (реализовать проверку уникальности)
-void parcel::generate_id()
+void Parcel::generate_id()
 {
 	//генерация случайного 8-ми значного номера id
 	this->id = 10000000 + rand() % 90000000;
 	//проверка индивидуальности данного номера (как???)
 }
 //получение города получателя
-string parcel::get_town()
+string Parcel::get_town()
 {
 	return (this->town_recipient);
 }
 
-void parcel::set_information()
+void Parcel::set_information()
 {
 	//генерация индивидуального 8-значного номера посылки (ID)
 	while (cin.get() != '\n');	//очистка потока ввода

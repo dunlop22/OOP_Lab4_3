@@ -1,10 +1,10 @@
 #pragma once
-#include "parcel.h"
-#include "container.h"
+#include "Parcel.h"
+#include "Container.h"
 #include <conio.h>
 #include <vector>
 
-class solver
+class Solver
 {
 	//посылка, передвинься в контейнер
 public:

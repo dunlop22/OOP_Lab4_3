@@ -1,12 +1,12 @@
 #pragma once
 #define _CRT_SECURE_NO_WARNINGS
-#include "container.h"
+#include "Container.h"
 #include <conio.h>
 #include <iostream>
 #include <string>
 #include <cstdlib>
 using namespace std;
-class parcel
+class Parcel
 {
 public:
 	int danger;

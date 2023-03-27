@@ -14,8 +14,8 @@ using namespace std;
 
 int main()
 {
-    std::vector<parcel> parcel_spisok;
-    std::vector<container> container_spisok;
+    std::vector<Parcel> parcel_spisok;
+    std::vector<Container> container_spisok;
 
 
     //parcel* parcel_spisok;
@@ -55,7 +55,7 @@ int main()
             */
             for (int i = 0; i < new_parcel; i++)
             {
-                parcel parce_temp;
+                Parcel parce_temp;
                 parce_temp.set_information();
                 parcel_spisok.push_back(parce_temp);
             }
