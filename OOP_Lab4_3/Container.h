@@ -14,18 +14,20 @@ class Container
 
 	int id;	//уникальный номер
 
-	double free_obem;			//Количество свободного места в контейнере
+	
 	string town;	//направление контейнера
 	vector<Parcel> parce;
 
 protected:
 	int kol_vo_parcel = 0;		//Общее количество посылок в контейнере
+	double free_obem;			//Количество свободного места в контейнере
 
 public:
 	virtual void generate_id();
 	virtual void get_parcel(Parcel parc);
 	virtual bool check_free_obem(double obem);
 	virtual string get_town();
+	virtual void print_information_c();
 	/*
 	//маленький
 	//большой
@@ -106,7 +108,7 @@ class danger_cont : public Container	//контейнер с опасным содержимым
 public:
 	danger_cont()
 	{
-		Container::kol_vo_parcel = 1;	//в целях безопасности
+		Container::kol_vo_parcel = 0;	//в целях безопасности
 	}
 };
 
@@ -116,7 +118,8 @@ class small_cont : public Container		//маленький контейнер
 public:
 	small_cont()
 	{
-		kol_vo_parcel = 3;
+		kol_vo_parcel = 0;
+		Container::free_obem = 100;
 	}
 };
 
@@ -126,7 +129,8 @@ public:
 	big_cont()
 	{
 
-		this->kol_vo_parcel = 5;
+		this->kol_vo_parcel = 0;
+		Container::free_obem = 200;
 	}
 
 };

@@ -7,7 +7,12 @@ int Parcel::get_id()
 //вывод информации о посылке
 void Parcel::print_information()
 {
-	cout << this->id << " : " << this->town_sender << "-->" << this->town_recipient << "  (" << this->shirina << "x" << this->dlina << "x" << this->visota << ") " << this->weight << "кг.\n";
+	cout << this->id << " : " << this->town_sender << "-->" << this->town_recipient;
+	if (this->danger == 1)
+	{
+		cout << " (!_DANGER_!) ";
+	}
+	cout << " (" << this->shirina << "x" << this->dlina << "x" << this->visota << ") " << this->weight << "кг.\n";
 }
 //генераци€ случайного номера дл€ посылки (реализовать проверку уникальности)
 void Parcel::generate_id()
@@ -25,7 +30,6 @@ string Parcel::get_town()
 void Parcel::set_information()
 {
 	//генераци€ индивидуального 8-значного номера посылки (ID)
-	while (cin.get() != '\n');	//очистка потока ввода
 	generate_id();
 	system("cls");
 	cout << "¬вод информации о новой посылке\n\n”никальный номер посылки (id): " << this->id;
@@ -53,7 +57,8 @@ void Parcel::set_information()
 	cout << "\n\n¬ведите длину: ";
 	//cin >> this->dlina;
 
-	this->obem = this->dlina * this->visota * this->shirina;
+	//this->obem = this->dlina * this->visota * this->shirina;
+	this->obem = 8 + rand() % (54 - 8 + 1);		//генераци€ случайного значени€ объема (дл€ теста)
 
 	cout << "\n\n¬ведите вес (кг.): ";
 	//cin >> this->weight;

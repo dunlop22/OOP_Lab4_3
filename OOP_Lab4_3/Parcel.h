@@ -1,6 +1,6 @@
 #pragma once
 #define _CRT_SECURE_NO_WARNINGS
-#include "Container.h"
+//#include "Container.h"
 #include <conio.h>
 #include <iostream>
 #include <string>
@@ -22,7 +22,7 @@ private:
 	double weight;
 
 	//int num_is_container;
-	//public virtaul void move
+	//public virtual void move
 
 public:
 	int get_id();

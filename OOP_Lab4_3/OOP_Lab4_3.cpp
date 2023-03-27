@@ -42,7 +42,7 @@ int main()
                 cout << "Введите количество новых посылок: ";
                 cin >> new_parcel;
             } while (new_parcel < 0);
-
+            cin.get();
             /*
             parcel* parcel_spisok_temp = parcel_spisok;       //создание временного массива для копии
             parcel_spisok = new parcel[num_parcel + new_parcel]; //создание динамического массива с новыми размерами
@@ -66,31 +66,26 @@ int main()
         {
             if (num_parcel > 0)         //имеются посылки для отправления
             {
-                int num_container = 0;
+                int num_container = 0;      //общее количество контейнеров
+                
                 //распределение посылок по контейнерам
-                for (int i = 0; i < num_parcel; i++)
-                {
-                    //solver
-                    //container** mass_container = new container * [0];
-                    Solver solv;
-
-                    solv.parcel_to_container(container_spisok, parcel_spisok, num_parcel, &num_container);
-                    //big_cont* ty = new big_cont[10];
-                    //parcel_spisok[i].move(  );
-
-                }
+                Solver solv;
+                solv.parcel_to_container(&container_spisok, parcel_spisok, num_parcel, &num_container);
 
 
                 //вывод контейнеров и их посылок
-
-                for (int i = 0; i < num_container; i++)
+                for (int i = 0;i < container_spisok.size();i++)
                 {
-
+                    container_spisok[i].print_information_c();
                 }
 
-                cout << "\n\nРаспредление закончено";
+                cout << "\n\nРаспредление закончено. \n\nНажмите любую клавишу для продолжения";
+                cout << "Общее количество контейнеров: " << container_spisok.size();
+                cout << "Общее количество контейнеров: " << num_container;
+                
                 _getch();
-                string town[5] = { "Барнаул", "Москва", "Новосибирск", "Владивосток", "Нижний Новгород" };
+                /*
+                string town[5] = {"Барнаул", "Москва", "Новосибирск", "Владивосток", "Нижний Новгород"};
                 cout << "Перемещение посылок в города...\n";
 
                 for (int i = 0; i < 5; i++)
@@ -104,6 +99,7 @@ int main()
                 }
                 num_parcel = 0;
                 //удаление массива с посылками
+                */
             }
             else        //посылок для отправления нет
             {
