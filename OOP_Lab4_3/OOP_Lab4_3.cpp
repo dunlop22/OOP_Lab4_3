@@ -26,10 +26,10 @@ int main()
     int func;   //флаг для выбора пункта меню
     do
     {
-        do           //главное                                                                                                  меню
+        do           //главное меню
         {
             system("cls");
-            cout << "1) Добавить несколько новых посылок\n2) Отправить посылки\n3) Просмотр информации об имеющихся посылках\nESC) Выход\n\nОбщее количество посылок на данный момент: " << num_parcel << "\nОбщее количество контейнеров на данный момент: " << container_spisok.size() << "\n";
+            cout << "1) Добавить несколько новых посылок\n2) Отправить посылки\n3) Просмотр информации об имеющихся посылках\nESC) Выход\n\nОбщее количество посылок на данный момент: " << parcel_spisok.size() << "\nОбщее количество контейнеров на данный момент: " << container_spisok.size() << "\n";
             func = _getch();
         } while (func != 49 && func != 50 && func != 51 && func != 27);
 
@@ -43,16 +43,7 @@ int main()
                 cin >> new_parcel;
             } while (new_parcel < 0);
             cin.get();
-            /*
-            parcel* parcel_spisok_temp = parcel_spisok;       //создание временного массива для копии
-            parcel_spisok = new parcel[num_parcel + new_parcel]; //создание динамического массива с новыми размерами
-            for (int i = 0; i < num_parcel; i++)
-            {
-                parcel_spisok[i] = parcel_spisok_temp[i];
-            }
-
-            delete[] parcel_spisok_temp;    //очистка памяти
-            */
+           
             for (int i = 0; i < new_parcel; i++)
             {
                 Parcel parce_temp;
@@ -64,9 +55,8 @@ int main()
 
         else if (func == 50)        //перемещение посылок
         {
-            if (num_parcel > 0)         //имеются посылки для отправления
+            if (parcel_spisok.size() > 0)         //имеются посылки для отправления
             {
-                
                 //распределение посылок по контейнерам
                 Solver solv;
                 solv.parcel_to_container(container_spisok, parcel_spisok, num_parcel);
@@ -78,26 +68,48 @@ int main()
                     container_spisok[i].print_information_c();
                 }
 
-                cout << "\n\nРаспредление закончено. \n\nНажмите любую клавишу для продолжения";
-                cout << "Общее количество контейнеров: " << container_spisok.size();
                 
+                cout << "Общее количество контейнеров: " << container_spisok.size();
+                cout << "\n\nНажмите любую клавишу для продолжения";
                 _getch();
-                /*
+                
+                for (int i = 0; i < parcel_spisok.size(); i++)
+                {
+                    parcel_spisok.clear();
+                    parcel_spisok.shrink_to_fit();
+
+                }
+                
                 string town[5] = {"Барнаул", "Москва", "Новосибирск", "Владивосток", "Нижний Новгород"};
                 cout << "Перемещение посылок в города...\n";
 
                 for (int i = 0; i < 5; i++)
                 {
-                    for (int j = 0; j < 5; j++)
+                    for (int k = 0; k < container_spisok.size(); k++)
                     {
-                        Sleep(500);
-                        cout << "....";
+                        if (container_spisok[k].get_town() == town[i])
+                        {
+                            cout << town[i] << "\n";
+                            cout << "Контейнер (ID): " << container_spisok[k].get_id();
+                            cout << "\nПосылки:\n";
+                            for (int n = 0; n < (container_spisok[k].get_inf_parcel()).size(); n++)
+                            {
+                                (container_spisok[k].get_inf_parcel())[n].print_information();
+                                for (int j = 0; j < 5; j++)
+                                {
+                                    Sleep(500);
+                                    cout << "....";
+                                }
+                            }
+
+                        }
                     }
-                    cout << town[i] << "\n";
+                    
                 }
+                container_spisok.clear();
+                container_spisok.shrink_to_fit();
                 num_parcel = 0;
                 //удаление массива с посылками
-                */
             }
             else        //посылок для отправления нет
             {
@@ -111,10 +123,10 @@ int main()
         {
             system("cls");
 
-            if (num_parcel > 0)
+            if (parcel_spisok.size() > 0)
             {
                 //вывод информации о посылках
-                for (int i = 0; i < num_parcel; i++)
+                for (int i = 0; i < parcel_spisok.size(); i++)
                 {
                     parcel_spisok[i].print_information();
                 }

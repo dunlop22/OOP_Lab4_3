@@ -6,7 +6,7 @@ void Solver::parcel_to_container(vector<Container> &container_mass, vector<Parce
 	{
 		if (parcel_mass[i].danger == 1)		//распределение опасной посылки
 		{
-			Container* container_temp = new danger_cont();		
+			Container* container_temp = new Danger_Cont();		
 
 			container_temp->generate_id();
 			container_temp->get_parcel(parcel_mass[i]);
@@ -19,12 +19,12 @@ void Solver::parcel_to_container(vector<Container> &container_mass, vector<Parce
 				//проверка наличия свободного места к существующих контейнерах
 				for (int j = 0; j < container_mass.size(); j++)
 				{
-					if (container_mass[j].check_free_obem(parcel_mass[i].obem) > 0)
+					if (container_mass[j].check_free_obem(parcel_mass[i].obem))
 					{
+
 						//проверка города направления
 						if (container_mass[j].get_town() == parcel_mass[i].get_town())
 						{
-							//container_mass[j]->set_parcel_minus();
 							container_mass[j].get_parcel(parcel_mass[i]);	//добавление 
 						}
 						else     //если контейнер для отправления в данный город еще не был создан/оформлен
@@ -41,7 +41,7 @@ void Solver::parcel_to_container(vector<Container> &container_mass, vector<Parce
 			else    //создание нового контейнера
 			{
 				new_cont:
-				Container* container_temp = new big_cont();
+				Container* container_temp = new Big_Cont();
 
 				container_temp->generate_id();
 				container_temp->get_parcel(parcel_mass[i]);

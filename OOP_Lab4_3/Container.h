@@ -13,13 +13,11 @@ class Container
 	//для опасных грузов
 
 	int id;	//уникальный номер
-
-	
 	string town;	//направление контейнера
 	vector<Parcel> parce;
+	int kol_vo_parcel = 0;		//Общее количество посылок в контейнере
 
 protected:
-	int kol_vo_parcel = 0;		//Общее количество посылок в контейнере
 	double free_obem;			//Количество свободного места в контейнере
 
 public:
@@ -27,113 +25,11 @@ public:
 	virtual void get_parcel(Parcel parc);
 	virtual bool check_free_obem(double obem);
 	virtual string get_town();
+	virtual int get_id();
 	virtual void print_information_c();
-	/*
-	//маленький
-	//большой
-	//для опасных грузов
-
-	int id;	//уникальный номер
-	int* spisok;	//массив с уникальными номерами посылок
-	string town;	//направление контейнера
-	//parcel* parce = new parcel();
-	parcel* parce;
-
-	public:
-		double free_obem;
-		int kol_vo_parcel = 0;
-
-	public: virtual void generate_id()
-	{
-		this->id = 10000 + rand() % 90000;
-	}
-
-	public: virtual void get_parcel(parcel parc)
-	{
-		//новое поле под посылку, заполняется идентификационным номером
-		//копия старого списка посылок
-
-
-		//увеличение размера динамического массива
-		parcel* parce_temp = parce;       //создание временного массива для копии
-		parce = new parcel[_msize(parce) / sizeof(parcel) + 1]; //создание динамического массива с новыми размерами
-		for (int i = 0; i < _msize(parce) / sizeof(parcel) - 1; i++)
-		{
-			parce[i] = parce_temp[i];
-		}
-
-		delete[] parce_temp;    //очистка памяти
-
-		parce[_msize(parce) / sizeof(parcel) - 1] = parc;
-
-
-		kol_vo_parcel = kol_vo_parcel + 1;
-		free_obem = free_obem - parc.obem;
-	}
-
-
-
-	public: virtual void go_to_transport(transport * transp1)
-	{
-		transp1->drive();
-	}
-
-	public: virtual void set_town(string town_)	//установка пункта назначения
-	{
-		this->town = town_;
-	}
-
-	public: virtual string get_town()	//установка пункта назначения
-	{
-		return (this->town);
-	}
-
-public: virtual int check_free_obem(double obem)	//проверка наличия свободного места
-{
-	if (free_obem - obem > 0)
-	{
-		return true;
-	}
-	else
-	{
-		return false;
-	}
-}
-*/
-
+	virtual vector<Parcel> get_inf_parcel();
 };
 
-class danger_cont : public Container	//контейнер с опасным содержимым
-{
-public:
-	danger_cont()
-	{
-		Container::kol_vo_parcel = 0;	//в целях безопасности
-	}
-};
-
-
-class small_cont : public Container		//маленький контейнер
-{
-public:
-	small_cont()
-	{
-		kol_vo_parcel = 0;
-		Container::free_obem = 100;
-	}
-};
-
-class big_cont : public Container	//большой контейнер
-{
-public:
-	big_cont()
-	{
-
-		this->kol_vo_parcel = 0;
-		Container::free_obem = 200;
-	}
-
-};
 //контейнер делегат транспортное средство
 
 //при создании контейнера он конфигурируется под то транпортное средство, на котором он будет передвигаться

@@ -1,6 +1,9 @@
 #pragma once
 #include "Parcel.h"
 #include "Container.h"
+#include "Big_Cont.h"
+#include "Small_Cont.h"
+#include "Danger_Cont.h"
 #include <conio.h>
 #include <vector>
 

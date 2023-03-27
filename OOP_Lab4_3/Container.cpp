@@ -5,8 +5,14 @@ void Container::generate_id()
 	this->id = 10000 + rand() % 90000;
 }
 
+int Container::get_id()
+{
+	return this->id;
+}
+
 void Container::get_parcel(Parcel parc)
 {
+	this->town = parc.get_town();
 	this->parce.push_back(parc);	//помещение посылки в список
 	this->free_obem = this->free_obem - parc.obem;
 	this->kol_vo_parcel = kol_vo_parcel + 1;
@@ -14,7 +20,7 @@ void Container::get_parcel(Parcel parc)
 
 bool Container::check_free_obem(double obem)
 {
-	if (this->free_obem > obem)
+	if (this->free_obem >= obem)
 	{
 		return true;
 	}
@@ -36,4 +42,10 @@ void Container::print_information_c()
 	{
 		this->parce[i].print_information();
 	}
+	cout << "Свободное место в контейнере: " << this->free_obem << "\n";
+}
+
+vector<Parcel> Container::get_inf_parcel()
+{
+	return this->parce;
 }
