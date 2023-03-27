@@ -142,10 +142,12 @@
     <ClCompile Include="Container.cpp" />
     <ClCompile Include="OOP_Lab4_3.cpp" />
     <ClCompile Include="Parcel.cpp" />
+    <ClCompile Include="Solver.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Container.h" />
     <ClInclude Include="Parcel.h" />
+    <ClInclude Include="Solver.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
