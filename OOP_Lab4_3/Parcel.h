@@ -21,12 +21,11 @@ private:
 	double dlina;
 	double weight;
 
-	//int num_is_container;
-	//public virtual void move
-
 public:
+	//присовение случайного номера посылке
 	int get_id();
 
+	//вывод информации о посылке
 	void print_information();
 
 	//генерация случайного номера для посылки (реализовать проверку уникальности)
@@ -35,7 +34,7 @@ public:
 	//получение города получателя
 	string get_town();
 
-
+	//внесение информации о посылке
 	void set_information();
 };
 

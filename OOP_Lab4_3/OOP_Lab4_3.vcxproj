@@ -144,19 +144,19 @@
     <ClCompile Include="Danger_Cont.cpp" />
     <ClCompile Include="OOP_Lab4_3.cpp" />
     <ClCompile Include="Parcel.cpp" />
+    <ClCompile Include="ProxyParcel.cpp" />
     <ClCompile Include="Small_Cont.cpp" />
     <ClCompile Include="Solver.cpp" />
-    <ClCompile Include="Transport.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Big_Cont.h" />
     <ClInclude Include="Container.h" />
     <ClInclude Include="Danger_Cont.h" />
     <ClInclude Include="Parcel.h" />
+    <ClInclude Include="ProxyParcel.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="Small_Cont.h" />
     <ClInclude Include="Solver.h" />
-    <ClInclude Include="Transport.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="OOP_Lab4_3.rc" />

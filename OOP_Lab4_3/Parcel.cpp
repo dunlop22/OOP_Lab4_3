@@ -10,10 +10,15 @@ void Parcel::print_information()
 	cout << this->id << " : " << this->town_sender << "-->" << this->town_recipient;
 	if (this->danger == 1)
 	{
-		cout << " (!_DANGER_!) ";
+		cout << " (!_DANGER_!)";
 	}
-	cout << " (" << this->shirina << "x" << this->dlina << "x" << this->visota << ") " << this->weight << "кг.   " << this->obem << " (м^3)\n";
+	else
+	{
+		cout << "             ";
+	}
+	cout << " (" << this->shirina << "x" << this->dlina << "x" << this->visota << ") " << this->weight << "кг. " << this->obem << " (м^3)\n";
 }
+
 //генерация случайного номера для посылки (реализовать проверку уникальности)
 void Parcel::generate_id()
 {
@@ -21,6 +26,7 @@ void Parcel::generate_id()
 	this->id = 10000000 + rand() % 90000000;
 	//проверка индивидуальности данного номера (как???)
 }
+
 //получение города получателя
 string Parcel::get_town()
 {
@@ -31,11 +37,15 @@ void Parcel::set_information()
 {
 	//генерация индивидуального 8-значного номера посылки (ID)
 	generate_id();
-	system("cls");
-	cout << "Ввод информации о новой посылке\n\nУникальный номер посылки (id): " << this->id;
-
-	cout << "\n\nВведите город отправителя: ";
-	getline(cin, this->town_sender);
+	
+	do
+	{
+		system("cls");
+		cout << "Ввод информации о новой посылке\n\nУникальный номер посылки (id): " << this->id;
+		cout << "\n\nВведите город отправителя: ";
+		getline(cin, this->town_sender);
+	} while (this->town_sender == "");
+	
 
 	string town[5] = { "Барнаул", "Москва", "Новосибирск", "Владивосток", "Нижний Новгород" };
 	int num_town;
@@ -60,26 +70,21 @@ void Parcel::set_information()
 	//cin >> this->dlina;
 	this->dlina = 8 + rand() % (54 - 8 + 1);		//генерация случайного значения объема (для теста)
 
+	cout << "\n\nВведите объем (м^3): ";
+	cin >> this->obem;
 	//this->obem = this->dlina * this->visota * this->shirina;
-	this->obem = 8 + rand() % (54 - 8 + 1);		//генерация случайного значения объема (для теста)
+	//this->obem = 8 + rand() % (54 - 8 + 1);		//генерация случайного значения объема (для теста)
 
 	cout << "\n\nВведите вес (кг.): ";
 	//cin >> this->weight;
 	this->weight = 8 + rand() % (54 - 8 + 1);		//генерация случайного значения объема (для теста)
 	do
 	{
-		cout << "\n\nПосылка опасная? (1 - ДА, 2 - НЕТ)";
+		cout << "\n\nПосылка опасная? (1 - ДА, 2 - НЕТ)\n";
 		this->danger = _getch();
 	} while (this->danger != 49 && this->danger != 50);
 	this->danger = this->danger - 48;
-	cout << "\n\nЛюбая клавиша для подтверждения";
+
+	cout << this->danger << "\n\nЛюбая клавиша для подтверждения";
 	_getch();
 }
-/*
-public: virtual void move(container * cont1)		//от решателя
-{
-	cont1->get_parcel(id);
-}
-*/
-
-

@@ -37,12 +37,16 @@ string Container::get_town()
 
 void Container::print_information_c()
 {
-	cout << "ID: " << this->id << "   ";
+	cout << "ID: " << this->id << "  ";
 	for (int i = 0;i < parce.size();i++)
 	{
+		if (i != 0)
+		{
+			cout << "           ";
+		}
 		this->parce[i].print_information();
 	}
-	cout << "Свободное место в контейнере: " << this->free_obem << "\n";
+	cout << "Свободное место в контейнере: " << this->free_obem << "м^3\n\n";
 }
 
 vector<Parcel> Container::get_inf_parcel()

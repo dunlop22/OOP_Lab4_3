@@ -1,14 +1,14 @@
-п»ї#define _CRT_SECURE_NO_WARNINGS
+#define _CRT_SECURE_NO_WARNINGS
 #include <iostream>
 #include <conio.h>
 #include <locale.h>
 #include <windows.h>
-
 #include "Container.h"
 #include "Parcel.h"
-#include "Transport.h"
 #include "Solver.h"
 #include <vector>
+#include "ProxyParcel.h"
+#include <cstdlib>;
 
 using namespace std;
 
@@ -17,29 +17,27 @@ int main()
     std::vector<Parcel> parcel_spisok;
     std::vector<Container> container_spisok;
 
-
-    //parcel* parcel_spisok;
-    //parcel_spisok = new parcel[0];
-    srand(time(NULL));  //РґР»СЏ РіРµРЅРµСЂР°С†РёРё СЃР»СѓС‡Р°Р№РЅС‹С… id
+    srand(time(NULL));  //для генерации случайных id
     setlocale(LC_ALL, "Russian");
-    int num_parcel = 0;     //РѕР±С‰РµРµ РєРѕР»РёС‡РµСЃС‚РІРѕ РїРѕСЃС‹Р»РѕРє
-    int func;   //С„Р»Р°Рі РґР»СЏ РІС‹Р±РѕСЂР° РїСѓРЅРєС‚Р° РјРµРЅСЋ
+    SetConsoleCP(1251);
+    int num_parcel = 0;     //общее количество посылок
+    int func;   //флаг для выбора пункта меню
     do
     {
-        do           //РіР»Р°РІРЅРѕРµ РјРµРЅСЋ
+        do           //главное меню
         {
             system("cls");
-            cout << "1) Р”РѕР±Р°РІРёС‚СЊ РЅРµСЃРєРѕР»СЊРєРѕ РЅРѕРІС‹С… РїРѕСЃС‹Р»РѕРє\n2) РћС‚РїСЂР°РІРёС‚СЊ РїРѕСЃС‹Р»РєРё\n3) РџСЂРѕСЃРјРѕС‚СЂ РёРЅС„РѕСЂРјР°С†РёРё РѕР± РёРјРµСЋС‰РёС…СЃСЏ РїРѕСЃС‹Р»РєР°С…\nESC) Р’С‹С…РѕРґ\n\nРћР±С‰РµРµ РєРѕР»РёС‡РµСЃС‚РІРѕ РїРѕСЃС‹Р»РѕРє РЅР° РґР°РЅРЅС‹Р№ РјРѕРјРµРЅС‚: " << parcel_spisok.size() << "\nРћР±С‰РµРµ РєРѕР»РёС‡РµСЃС‚РІРѕ РєРѕРЅС‚РµР№РЅРµСЂРѕРІ РЅР° РґР°РЅРЅС‹Р№ РјРѕРјРµРЅС‚: " << container_spisok.size() << "\n";
+            cout << "1) Добавить несколько новых посылок\n2) Отправить посылки\n3) Просмотр информации об имеющихся посылках\nESC) Выход\n\nОбщее количество посылок на данный момент: " << parcel_spisok.size() << "\nОбщее количество контейнеров на данный момент: " << container_spisok.size() << "\n";
             func = _getch();
         } while (func != 49 && func != 50 && func != 51 && func != 27);
 
         if (func == 49)
         {
-            int new_parcel; ///РєРѕР»РёС‡РµСЃС‚РІРѕ РЅРѕРІС‹С… РїРѕСЃС‹Р»РѕРє
+            int new_parcel; ///количество новых посылок
             do
             {
                 system("cls");
-                cout << "Р’РІРµРґРёС‚Рµ РєРѕР»РёС‡РµСЃС‚РІРѕ РЅРѕРІС‹С… РїРѕСЃС‹Р»РѕРє: ";
+                cout << "Введите количество новых посылок: ";
                 cin >> new_parcel;
             } while (new_parcel < 0);
             cin.get();
@@ -47,30 +45,54 @@ int main()
             for (int i = 0; i < new_parcel; i++)
             {
                 Parcel parce_temp;
-                parce_temp.set_information();
+                ProxyParcel Prox;
+                
+                do
+                {
+                    do
+                    {
+                        parce_temp.set_information();
+                        Prox.set_parcel(&parce_temp);
+                        if (!(Prox.check_info()))
+                        {
+                            cout << "\n\nНесоответствие типа посылки и занимаемого объема.\nНажмите любую клавишу для повторного ввода информации о посылке!\n";
+                            _getch();
+                        }
+                    } while (!(Prox.check_info()));        //минимальная  проверка. Опасный груз не может быть больше 50усл.ед.
+
+                    if (Prox.send_parcel())
+                    {
+                        cout << "\n\nНевозможно доставить посылку в данный пункт назначения.\nНажмите любую клавишу для повторного ввода информации о посылке!\n";
+                        _getch();
+                    }
+                } while (!(Prox.send_parcel()));
+
                 parcel_spisok.push_back(parce_temp);
+                
             }
-            num_parcel = num_parcel + new_parcel;       //РѕР±С‰РµРµ РєРѕР»РёС‡РµСЃС‚РІРѕ РїРѕСЃС‹Р»РѕРє (РІРјРµСЃС‚Рµ СЃ С‚РѕР»СЊРєРѕ С‡С‚Рѕ РґРѕР±Р°РІР»РµРЅРЅС‹РјРё)
+            num_parcel = num_parcel + new_parcel;       //общее количество посылок (вместе с только что добавленными)
         }
 
-        else if (func == 50)        //РїРµСЂРµРјРµС‰РµРЅРёРµ РїРѕСЃС‹Р»РѕРє
+        else if (func == 50)        //перемещение посылок
         {
-            if (parcel_spisok.size() > 0)         //РёРјРµСЋС‚СЃСЏ РїРѕСЃС‹Р»РєРё РґР»СЏ РѕС‚РїСЂР°РІР»РµРЅРёСЏ
+            if (parcel_spisok.size() > 0)         //имеются посылки для отправления
             {
-                //СЂР°СЃРїСЂРµРґРµР»РµРЅРёРµ РїРѕСЃС‹Р»РѕРє РїРѕ РєРѕРЅС‚РµР№РЅРµСЂР°Рј
+                system("cls");
+                //распределение посылок по контейнерам
                 Solver solv;
                 solv.parcel_to_container(container_spisok, parcel_spisok, num_parcel);
 
 
-                //РІС‹РІРѕРґ РєРѕРЅС‚РµР№РЅРµСЂРѕРІ Рё РёС… РїРѕСЃС‹Р»РѕРє
+                //вывод контейнеров и их посылок
                 for (int i = 0;i < container_spisok.size();i++)
                 {
+                    cout << "Контейнер №: " << i + 1 << "\n";
                     container_spisok[i].print_information_c();
                 }
 
                 
-                cout << "РћР±С‰РµРµ РєРѕР»РёС‡РµСЃС‚РІРѕ РєРѕРЅС‚РµР№РЅРµСЂРѕРІ: " << container_spisok.size();
-                cout << "\n\nРќР°Р¶РјРёС‚Рµ Р»СЋР±СѓСЋ РєР»Р°РІРёС€Сѓ РґР»СЏ РїСЂРѕРґРѕР»Р¶РµРЅРёСЏ";
+                cout << "***   ***   ***   ***   ***   ***\nОбщее количество контейнеров: " << container_spisok.size();
+                cout << "\n\nНажмите любую клавишу для продолжения";
                 _getch();
                 
                 for (int i = 0; i < parcel_spisok.size(); i++)
@@ -80,8 +102,8 @@ int main()
 
                 }
                 
-                string town[5] = {"Р‘Р°СЂРЅР°СѓР»", "РњРѕСЃРєРІР°", "РќРѕРІРѕСЃРёР±РёСЂСЃРє", "Р’Р»Р°РґРёРІРѕСЃС‚РѕРє", "РќРёР¶РЅРёР№ РќРѕРІРіРѕСЂРѕРґ"};
-                cout << "РџРµСЂРµРјРµС‰РµРЅРёРµ РїРѕСЃС‹Р»РѕРє РІ РіРѕСЂРѕРґР°...\n";
+                string town[5] = {"Барнаул", "Москва", "Новосибирск", "Владивосток", "Нижний Новгород"};
+                cout << "\n\n\nПеремещение посылок в города...\n";
 
                 for (int i = 0; i < 5; i++)
                 {
@@ -89,43 +111,47 @@ int main()
                     {
                         if (container_spisok[k].get_town() == town[i])
                         {
-                            cout << town[i] << "\n";
-                            cout << "РљРѕРЅС‚РµР№РЅРµСЂ (ID): " << container_spisok[k].get_id();
-                            cout << "\nРџРѕСЃС‹Р»РєРё:\n";
+                            cout << "\n__" << town[i] << "__" << "\n";
+                            cout << "Контейнер (ID): " << container_spisok[k].get_id();
+                            cout << "\nПосылки:\n\n";
                             for (int n = 0; n < (container_spisok[k].get_inf_parcel()).size(); n++)
                             {
                                 (container_spisok[k].get_inf_parcel())[n].print_information();
-                                for (int j = 0; j < 5; j++)
-                                {
-                                    Sleep(500);
-                                    cout << "....";
-                                }
+                                cout << "\n";
                             }
-
+                            for (int j = 0; j < 5; j++)
+                            {
+                                Sleep(500);
+                                cout << "....";
+                            }
+                            cout << "-->" << container_spisok[k].get_town() << "\nКонтейнер доставлен!\n";
                         }
                     }
-                    
                 }
+
                 container_spisok.clear();
                 container_spisok.shrink_to_fit();
                 num_parcel = 0;
-                //СѓРґР°Р»РµРЅРёРµ РјР°СЃСЃРёРІР° СЃ РїРѕСЃС‹Р»РєР°РјРё
+
+                cout << "\n\nНажмите любую клавишу для выхода в главное меню";
+                _getch();
+                //удаление массива с посылками
             }
-            else        //РїРѕСЃС‹Р»РѕРє РґР»СЏ РѕС‚РїСЂР°РІР»РµРЅРёСЏ РЅРµС‚
+            else        //посылок для отправления нет
             {
                 system("cls");
-                cout << "РќРµС‚ РїРѕСЃС‹Р»РѕРє РґР»СЏ РѕС‚РїСЂР°РІР»РµРЅРёСЏ!\n\nР”Р»СЏ РїСЂРѕРґРѕР»Р¶РµРЅРёСЏ РЅР°Р¶РјРёС‚Рµ Р»СЋР±СѓСЋ РєР»Р°РІРёС€Сѓ";
+                cout << "Нет посылок для отправления!\n\nДля продолжения нажмите любую клавишу";
                 _getch();
             }
         }
 
-        else if (func == 51)        //РїСЂРѕСЃРјРѕС‚СЂ РёРЅС„РѕСЂРјР°С†РёРё Рѕ СЃСѓС‰РµСЃС‚РІСѓСЋС‰РёС… РїРѕСЃС‹Р»РєР°С…
+        else if (func == 51)        //просмотр информации о существующих посылках
         {
             system("cls");
 
             if (parcel_spisok.size() > 0)
             {
-                //РІС‹РІРѕРґ РёРЅС„РѕСЂРјР°С†РёРё Рѕ РїРѕСЃС‹Р»РєР°С…
+                //вывод информации о посылках
                 for (int i = 0; i < parcel_spisok.size(); i++)
                 {
                     parcel_spisok[i].print_information();
@@ -133,14 +159,14 @@ int main()
             }
             else
             {
-                cout << "РќРµС‚ РїРѕСЃС‹Р»РѕРє РґР»СЏ РїСЂРѕСЃРјРѕС‚СЂР° РёРЅС„РѕСЂРјР°С†РёРё!";
+                cout << "Нет посылок для просмотра информации!";
             }
-            cout << "\n\nР”Р»СЏ РїСЂРѕРґРѕР»Р¶РµРЅРёСЏ РЅР°Р¶РјРёС‚Рµ Р»СЋР±СѓСЋ РєР»Р°РІРёС€Сѓ\n";
+            cout << "\n\nДля продолжения нажмите любую клавишу\n";
             _getch();
         }
     } while (func != 27);
 
-    //drive...-> РјРµРЅСЋ РїРµСЂРµРјРµС‰РµРЅРёСЏ -> РєРѕРЅРµС‡РЅС‹Р№ РїСѓРЅРєС‚
+    //drive...-> меню перемещения -> конечный пункт
 
 
 }
