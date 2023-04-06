@@ -45,26 +45,30 @@ int main()
             for (int i = 0; i < new_parcel; i++)
             {
                 Parcel parce_temp;
-                ProxyParcel Prox;
+                //ProxyParcel Prox;
+                
                 
                 do
                 {
-                    do
+                    parce_temp.set_information();
+                    Parcel* Prox = new ProxyParcel(parce_temp);
+                    //IReader* proxyScan1 = new ProxyReader(numplateScan)
+                    //Prox.set_parcel(parce_temp);
+                    if (!(Prox.check_info()))
                     {
-                        parce_temp.set_information();
-                        Prox.set_parcel(&parce_temp);
-                        if (!(Prox.check_info()))
-                        {
-                            cout << "\n\nНесоответствие типа посылки и занимаемого объема.\nНажмите любую клавишу для повторного ввода информации о посылке!\n";
-                            _getch();
-                        }
-                    } while (!(Prox.check_info()));        //минимальная  проверка. Опасный груз не может быть больше 50усл.ед.
-
-                    if (Prox.send_parcel())
-                    {
-                        cout << "\n\nНевозможно доставить посылку в данный пункт назначения.\nНажмите любую клавишу для повторного ввода информации о посылке!\n";
+                        _getch();
                         _getch();
                     }
+                } while (!(Prox.check_info()));        //минимальная  проверка. Опасный груз не может быть больше 50усл.ед.
+                do
+                {
+                    
+                    /*
+                    if (!Prox.send_parcel())
+                    {
+                        _getch();
+                    }
+                    */
                 } while (!(Prox.send_parcel()));
 
                 parcel_spisok.push_back(parce_temp);

@@ -45,7 +45,6 @@ void Parcel::set_information()
 		cout << "\n\nВведите город отправителя: ";
 		getline(cin, this->town_sender);
 	} while (this->town_sender == "");
-	
 
 	string town[5] = { "Барнаул", "Москва", "Новосибирск", "Владивосток", "Нижний Новгород" };
 	int num_town;
@@ -58,26 +57,27 @@ void Parcel::set_information()
 	this->town_recipient = town[num_town - 49];
 	cout << num_town - 48 << " (" << this->town_recipient << ")";
 
-	cout << "\n\nВведите ширину: ";
-	//cin >> this->shirina;
-	this->shirina = 8 + rand() % (54 - 8 + 1);		//генерация случайного значения объема (для теста)
+	cout << "\n\nВведите ширину (м.): ";
+	cin >> this->shirina;
+	//this->shirina = 8 + rand() % (54 - 8 + 1);		//генерация случайного значения объема (для теста)
 
-	cout << "\n\nВведите высоту: ";
-	//cin >> this->visota;
-	this->visota = 8 + rand() % (54 - 8 + 1);		//генерация случайного значения объема (для теста)
+	cout << "\n\nВведите высоту (м.): ";
+	cin >> this->visota;
+	//this->visota = 8 + rand() % (54 - 8 + 1);		//генерация случайного значения объема (для теста)
 
-	cout << "\n\nВведите длину: ";
-	//cin >> this->dlina;
-	this->dlina = 8 + rand() % (54 - 8 + 1);		//генерация случайного значения объема (для теста)
+	cout << "\n\nВведите длину (м.): ";
+	cin >> this->dlina;
+	//this->dlina = 8 + rand() % (54 - 8 + 1);		//генерация случайного значения объема (для теста)
 
-	cout << "\n\nВведите объем (м^3): ";
-	cin >> this->obem;
-	//this->obem = this->dlina * this->visota * this->shirina;
+	cout << "\n\nИтоговый объем (м^3): ";
+	this->obem = this->dlina * this->visota * this->shirina;
+	cout << this->obem;
+	//
 	//this->obem = 8 + rand() % (54 - 8 + 1);		//генерация случайного значения объема (для теста)
 
 	cout << "\n\nВведите вес (кг.): ";
-	//cin >> this->weight;
-	this->weight = 8 + rand() % (54 - 8 + 1);		//генерация случайного значения объема (для теста)
+	cin >> this->weight;
+	//this->weight = 8 + rand() % (54 - 8 + 1);		//генерация случайного значения объема (для теста)
 	do
 	{
 		cout << "\n\nПосылка опасная? (1 - ДА, 2 - НЕТ)\n";
@@ -86,5 +86,7 @@ void Parcel::set_information()
 	this->danger = this->danger - 48;
 
 	cout << this->danger << "\n\nЛюбая клавиша для подтверждения";
+	cin.ignore();
 	_getch();
+	
 }
